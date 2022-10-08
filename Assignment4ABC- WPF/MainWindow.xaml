@@ -5,28 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment4ABC__WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="548">
-    
-    
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
-        </Grid.RowDefinitions>
-    </Grid>
-        
-   
+        Title="MainWindow" Height="350" Width="631">
+
+    <StackPanel>
+        <Grid RenderTransformOrigin="0.503,0.658">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="334*" />
+                <ColumnDefinition Width="295*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="Add new Recipe" Grid.Column="0" Margin="10,0,0,-251">
+
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <Label Content="Name of recipe"  />
+                        <TextBox x:Name="txtNameOfTheRecipe" Height="20" Grid.ColumnSpan="2" Margin="103,6,10,0" />
+                    </Grid>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Category"/>
+                        <ComboBox Name="cmbCategory" Grid.Column="1"/>
+                        <Button x:Name="btnAddIngredients" Grid.Column="3" Content="Add Ingredients" />
+                    </Grid>
+                </StackPanel>
+
+
+
+
+            </GroupBox>
+
+        </Grid>
+
+
+
+    </StackPanel>
+
+
 </Window>
