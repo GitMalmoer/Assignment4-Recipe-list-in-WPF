@@ -19,9 +19,31 @@ namespace Assignment4ABC__WPF
     /// </summary>
     public partial class WindowIngredients : Window
     {
+        //private string[] _arrayOfIngredients;
         public WindowIngredients()
         {
+            //_arrayOfIngredients = Recipe.ArrayOfIngredients;
             InitializeComponent();
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            String ingredient = txtIngredient.Text;
+            Recipe.AddToArrayOfIngredients(ingredient);
+            ShowList();
+        }
+
+        private void ShowList()
+        {
+            lstIngredients.Items.Clear();
+            for (int i = 0; i < Recipe.ArrayOfIngredients.Length; i++)
+            {
+                if (Recipe.ArrayOfIngredients[i] != null)
+                {
+                    lstIngredients.Items.Add(Recipe.ArrayOfIngredients[i]);
+                }
+            }
+            //lstIngredients.Items.Add(Recipe.ArrayOfIngredients.Length);
         }
     }
 }

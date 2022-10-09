@@ -20,11 +20,15 @@ namespace Assignment4ABC__WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        Recipe recipe = new Recipe();
+
+        private const int maxNumOfIngredients = 50;
+        private const int maxNumOfElements = 200;
+        Recipe curRecipe = new Recipe(maxNumOfIngredients);
         public MainWindow()
         {
             InitializeComponent();
             InitializeGUI();
+            
         }
 
         private void InitializeGUI()
@@ -36,19 +40,23 @@ namespace Assignment4ABC__WPF
 
         private void btnAddIngredients_Click(object sender, RoutedEventArgs e)
         {
+            WindowIngredients windowIngredients = new WindowIngredients();
+            lblCategory.Content = curRecipe.FoodCategory; //tester
+            windowIngredients.Show();
             
-            //lblCategory.Content = cmbCategory.SelectedItem;
-            lblCategory.Content = recipe.FoodCategory; 
         }
 
         private void SelectionChangedComboBox(object sender, SelectionChangedEventArgs e)
         {
-            recipe.FoodCategory = (FoodCategory)cmbCategory.SelectedItem;
+            curRecipe.FoodCategory = (FoodCategory)cmbCategory.SelectedItem; // sends to class food category 
         }
 
         private void btnAddRecipe_Click(object sender, RoutedEventArgs e)
         {
-            recipe.NameRecipe = txtNameOfTheRecipe.Text;
+            curRecipe.NameRecipe = txtNameOfTheRecipe.Text; // sends to class name of recipe
+            curRecipe.DescriptionRecipe = txtDescription.Text; // sends to class description of recipe
         }
+
+       
     }
 }
