@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment4ABC__WPF"
         mc:Ignorable="d"
-        Title="Recipe book by Marcin Junka in WPF!" Height="350" Width="846">
+        Title="Recipe book by Marcin Junka in WPF!" Height="400" Width="846">
 
     <StackPanel>
         <Grid Height="333">
@@ -33,14 +33,14 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Category"/>
-                        <ComboBox Name="cmbCategory" Grid.Column="1"/>
-                        <Button x:Name="btnAddIngredients" Grid.Column="3" Content="Add Ingredients" />
+                        <Label  x:Name ="lblCategory" Content="Category" />
+                        <ComboBox x:Name="cmbCategory" Grid.Column="1" Margin="0 0 5 0 "  SelectionChanged="SelectionChangedComboBox"/>
+                        <Button x:Name="btnAddIngredients" Grid.Column="3" Content="Add Ingredients" Click="btnAddIngredients_Click"/>
                     </Grid>
                     <!-- Textbox-->
                     <TextBox x:Name="txtInstruction" Margin="5,5,5,15" Height="200"/>
                     <!-- Add recipe button -->
-                    <Button x:Name="btnAddRecipe" Content="Add Recipe"/>
+                    <Button x:Name="btnAddRecipe" Content="Add Recipe" Click="btnAddRecipe_Click"/>
                 </StackPanel>
             </GroupBox>
             
@@ -70,7 +70,7 @@
                     </Grid.ColumnDefinitions>
                     <Button Content="Edit-Begin" Grid.Column="0" Margin="5,1,5,0"/>
                     <Button Content="Edit-Finish" Grid.Column="1" Margin="5,1,5,0"/>
-                    <Button Content="Delete" Grid.Column="2" Margin="5,1,5,0"/>
+                    <Button Content="Delete" Grid.Column="2" Margin="4,0,5,0" Height="20" VerticalAlignment="Bottom"/>
                     <Button Content="Clear Selection" Grid.Column="3" Margin="5,1,5,0"/>
                 </Grid>
 

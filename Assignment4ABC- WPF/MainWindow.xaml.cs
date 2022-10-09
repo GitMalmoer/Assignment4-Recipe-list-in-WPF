@@ -20,9 +20,35 @@ namespace Assignment4ABC__WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        Recipe recipe = new Recipe();
         public MainWindow()
         {
             InitializeComponent();
+            InitializeGUI();
+        }
+
+        private void InitializeGUI()
+        {
+            // ComboBox
+            cmbCategory.ItemsSource = Enum.GetValues(typeof(FoodCategory));
+            cmbCategory.SelectedIndex = 10; // default other option selected
+        }
+
+        private void btnAddIngredients_Click(object sender, RoutedEventArgs e)
+        {
+            
+            //lblCategory.Content = cmbCategory.SelectedItem;
+            lblCategory.Content = recipe.FoodCategory; 
+        }
+
+        private void SelectionChangedComboBox(object sender, SelectionChangedEventArgs e)
+        {
+            recipe.FoodCategory = (FoodCategory)cmbCategory.SelectedItem;
+        }
+
+        private void btnAddRecipe_Click(object sender, RoutedEventArgs e)
+        {
+            recipe.NameRecipe = txtNameOfTheRecipe.Text;
         }
     }
 }
