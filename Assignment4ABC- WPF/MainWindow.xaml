@@ -5,28 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment4ABC__WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="631">
+        Title="Recipe book by Marcin Junka in WPF!" Height="350" Width="846">
 
     <StackPanel>
-        <Grid RenderTransformOrigin="0.503,0.658">
+        <Grid Height="333">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="334*" />
-                <ColumnDefinition Width="295*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <GroupBox Header="Add new Recipe" Grid.Column="0" Margin="10,0,0,-251">
 
+            <GroupBox Header="Add new Recipe" Grid.Column="0" Margin="10,5,0,10">
                 <StackPanel>
-                    <Grid>
+                    <!-- Name of the recipe -->
+                        <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-
-
-                        <Label Content="Name of recipe"  />
-                        <TextBox x:Name="txtNameOfTheRecipe" Height="20" Grid.ColumnSpan="2" Margin="103,6,10,0" />
+                        <Label Content="Name of recipe" Grid.Column="0" />
+                        <TextBox x:Name="txtNameOfTheRecipe" Height="20" Grid.Column="1" Grid.ColumnSpan="2" />
                     </Grid>
-                    
+                    <!-- Category -->
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -37,13 +37,47 @@
                         <ComboBox Name="cmbCategory" Grid.Column="1"/>
                         <Button x:Name="btnAddIngredients" Grid.Column="3" Content="Add Ingredients" />
                     </Grid>
+                    <!-- Textbox-->
+                    <TextBox x:Name="txtInstruction" Margin="5,5,5,15" Height="200"/>
+                    <!-- Add recipe button -->
+                    <Button x:Name="btnAddRecipe" Content="Add Recipe"/>
                 </StackPanel>
-
-
-
-
             </GroupBox>
+            
+            <StackPanel Grid.Column="1">
+                <!-- Labels Name category no. of indg  -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Name" Grid.Column="0"/>
+                    <Label Content="Category" Grid.Column="1"/>
+                    <Label Content="No. of Ingredients" Grid.Column="2"/>
+                </Grid>
+                
+                <!-- List Box -->
+                <ListBox Height="250" Margin="5,5,5,5"/>
 
+                <!-- 4 buttons  -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Edit-Begin" Grid.Column="0" Margin="5,1,5,0"/>
+                    <Button Content="Edit-Finish" Grid.Column="1" Margin="5,1,5,0"/>
+                    <Button Content="Delete" Grid.Column="2" Margin="5,1,5,0"/>
+                    <Button Content="Clear Selection" Grid.Column="3" Margin="5,1,5,0"/>
+                </Grid>
+
+                <!-- Label double click for info -->
+                <Label Content="Double click on an item for ingredients cooking instructions!" HorizontalAlignment="Center" Foreground="Green" FontWeight="Bold"/>
+            
+            </StackPanel>
         </Grid>
 
 
