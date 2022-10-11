@@ -23,12 +23,14 @@ namespace Assignment4ABC__WPF
 
         private const int maxNumOfIngredients = 50;
         private const int maxNumOfElements = 200;
+
         Recipe curRecipe = new Recipe(maxNumOfIngredients);
+        
+
         public MainWindow()
         {
             InitializeComponent();
             InitializeGUI();
-            
         }
 
         private void InitializeGUI()
@@ -40,10 +42,12 @@ namespace Assignment4ABC__WPF
 
         private void btnAddIngredients_Click(object sender, RoutedEventArgs e)
         {
-            WindowIngredients windowIngredients = new WindowIngredients();
-            lblCategory.Content = curRecipe.FoodCategory; //tester
-            windowIngredients.Show();
             
+            lblCategory.Content = curRecipe.FoodCategory; //tester
+            //PASSING THE curRecipe OBJECT TO NEW WINDOW - WindowIngredients!!!
+            WindowIngredients dlg = new WindowIngredients(curRecipe);
+            dlg. ShowDialog();
+
         }
 
         private void SelectionChangedComboBox(object sender, SelectionChangedEventArgs e)
@@ -55,8 +59,16 @@ namespace Assignment4ABC__WPF
         {
             curRecipe.NameRecipe = txtNameOfTheRecipe.Text; // sends to class name of recipe
             curRecipe.DescriptionRecipe = txtDescription.Text; // sends to class description of recipe
+
+            lstResults.Items.Add(curRecipe.ArrayOfIngredients[0]);
+            lstResults.Items.Add(curRecipe.ArrayOfIngredients[1]);
+            lstResults.Items.Add(curRecipe.ArrayOfIngredients[2]);
+            
         }
 
-       
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

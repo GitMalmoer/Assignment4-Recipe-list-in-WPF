@@ -58,7 +58,7 @@
                 </Grid>
                 
                 <!-- List Box -->
-                <ListBox Height="250" Margin="5,5,5,5"/>
+                <ListBox x:Name="lstResults" Height="250" Margin="5,5,5,5" SelectionChanged="ListBox_SelectionChanged"/>
 
                 <!-- 4 buttons  -->
                 <Grid>

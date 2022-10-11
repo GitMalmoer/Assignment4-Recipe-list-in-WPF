@@ -17,33 +17,46 @@ namespace Assignment4ABC__WPF
     /// <summary>
     /// Interaction logic for WindowIngredients.xaml
     /// </summary>
-    public partial class WindowIngredients : Window
+    public partial class WindowIngredients : Window 
     {
-        //private string[] _arrayOfIngredients;
-        public WindowIngredients()
+        Recipe curRecipe;
+        
+        public WindowIngredients(Recipe recipe) // GETTING THE OBJECT curRecipe
         {
-            //_arrayOfIngredients = Recipe.ArrayOfIngredients;
             InitializeComponent();
+            curRecipe = recipe;
+            Recipe temporaryRecipe = new Recipe(50);
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             String ingredient = txtIngredient.Text;
-            Recipe.AddToArrayOfIngredients(ingredient);
+            curRecipe.AddToArrayOfIngredients(ingredient);
             ShowList();
         }
 
         private void ShowList()
         {
             lstIngredients.Items.Clear();
-            for (int i = 0; i < Recipe.ArrayOfIngredients.Length; i++)
+            for (int i = 0; i < curRecipe.ArrayOfIngredients.Length; i++)
             {
-                if (Recipe.ArrayOfIngredients[i] != null)
+                if (curRecipe.ArrayOfIngredients[i] != null)
                 {
-                    lstIngredients.Items.Add(Recipe.ArrayOfIngredients[i]);
+                    lstIngredients.Items.Add(curRecipe.ArrayOfIngredients[i]);
                 }
             }
-            //lstIngredients.Items.Add(Recipe.ArrayOfIngredients.Length);
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            
+        }
+
+        private void btnOk_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+            temporaryRecipe = curRecipe;
         }
     }
 }
