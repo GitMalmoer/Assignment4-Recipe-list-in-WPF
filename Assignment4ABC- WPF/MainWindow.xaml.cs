@@ -25,6 +25,7 @@ namespace Assignment4ABC__WPF
         private const int maxNumOfElements = 200;
 
         Recipe curRecipe = new Recipe(maxNumOfIngredients);
+        RecipeManager recipeManager = new RecipeManager(maxNumOfElements);
         
 
         public MainWindow()
@@ -42,8 +43,6 @@ namespace Assignment4ABC__WPF
 
         private void btnAddIngredients_Click(object sender, RoutedEventArgs e)
         {
-            
-            lblCategory.Content = curRecipe.FoodCategory; //tester
             //PASSING THE curRecipe OBJECT TO NEW WINDOW - WindowIngredients!!!
             WindowIngredients dlg = new WindowIngredients(curRecipe);
             dlg. ShowDialog();
@@ -60,12 +59,19 @@ namespace Assignment4ABC__WPF
             curRecipe.NameRecipe = txtNameOfTheRecipe.Text; // sends to class name of recipe
             curRecipe.DescriptionRecipe = txtDescription.Text; // sends to class description of recipe
 
-            lstResults.Items.Add(curRecipe.ArrayOfIngredients[0]);
-            lstResults.Items.Add(curRecipe.ArrayOfIngredients[1]);
-            lstResults.Items.Add(curRecipe.ArrayOfIngredients[2]);
-            
+            recipeManager.AddRecipeObject(curRecipe);
+
+            lstResults.Items.Clear();
+            for (int i = 0; i < recipeManager.RecipeArray.Length; i++)
+            {
+                if (recipeManager.RecipeArray[i] != null)
+                lstResults.Items.Add(recipeManager.RecipeArray[i].NameRecipe + "                                         " + recipeManager.RecipeArray[i].FoodCategory + "                                   " + recipeManager.RecipeArray[i].IngredientCounter);
+            }
+            //lstResults.Items.Add("{0}", recipeManager.RecipeArray[0].NameRecipe); why this wont work?
+            curRecipe = new Recipe(maxNumOfIngredients);
         }
 
+        
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 

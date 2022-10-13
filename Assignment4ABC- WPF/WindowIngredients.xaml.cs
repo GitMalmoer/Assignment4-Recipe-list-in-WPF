@@ -20,43 +20,93 @@ namespace Assignment4ABC__WPF
     public partial class WindowIngredients : Window 
     {
         Recipe curRecipe;
-        
+        private int _selectedIndex;
         public WindowIngredients(Recipe recipe) // GETTING THE OBJECT curRecipe
         {
             InitializeComponent();
             curRecipe = recipe;
-            Recipe temporaryRecipe = new Recipe(50);
+            ShowList();
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             String ingredient = txtIngredient.Text;
-            curRecipe.AddToArrayOfIngredients(ingredient);
+
+            if (ingredient != string.Empty)
+            {
+                curRecipe.AddToArrayOfIngredients(ingredient);
+            }
+            else
+            {
+                MessageBox.Show("The textbox is empty");
+            }
             ShowList();
+            
         }
 
         private void ShowList()
         {
+            int ingredientCounter = 0;
             lstIngredients.Items.Clear();
             for (int i = 0; i < curRecipe.ArrayOfIngredients.Length; i++)
             {
-                if (curRecipe.ArrayOfIngredients[i] != null)
+                
+                if (curRecipe.ArrayOfIngredients[i] != null && curRecipe.ArrayOfIngredients[i] != String.Empty)
                 {
                     lstIngredients.Items.Add(curRecipe.ArrayOfIngredients[i]);
+                    ingredientCounter++;
                 }
             }
+            lblNumberIngredients.Content = ingredientCounter;
+            curRecipe.IngredientCounter = ingredientCounter;
         }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        private void ClearArray()
         {
-            this.DialogResult = false;
-            
+            for (int i = 0; i < curRecipe.ArrayOfIngredients.Length; i++)
+            {
+                curRecipe.ArrayOfIngredients[i]= null;
+            }
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
-            temporaryRecipe = curRecipe;
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            ClearArray();
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtIngredient.Text != string.Empty)
+            {
+                if (curRecipe.Index != -1)
+                {
+                    curRecipe.ArrayOfIngredients[curRecipe.Index] = txtIngredient.Text;
+                    ShowList();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Textbox is empty!");
+            }
+        }
+
+        private void lstIngredients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = lstIngredients.SelectedIndex;
+            curRecipe.Index = index;
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            int index = curRecipe.Index;
+            curRecipe.DeleteAt(index);
+            ShowList();
         }
     }
 }

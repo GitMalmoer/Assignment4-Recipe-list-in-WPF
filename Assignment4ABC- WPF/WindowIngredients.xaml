@@ -28,14 +28,14 @@
                 <!-- Text Box and ListBox-->
                 <StackPanel>
                     <TextBox x:Name="txtIngredient" Grid.Column="0" Height="20" Margin="5 0 5 0"/>
-                    <ListBox x:Name="lstIngredients" Grid.Column="0" Height="250" Margin="5 5 5 0 "/>
+                    <ListBox x:Name="lstIngredients" Grid.Column="0" Height="250" Margin="5 5 5 0 " SelectionChanged="lstIngredients_SelectionChanged"/>
                 </StackPanel>
 
                 <!-- Buttons-->
                 <StackPanel Grid.Column="1">
                     <Button x:Name="btnAdd" Grid.Column="1" Content="Add" Margin="5 0 5 0" Click="btnAdd_Click"/>
-                    <Button x:Name="btnEdit" Grid.Column="1" Content="Edit" Margin="5 5 5 0"/>
-                    <Button x:Name="btnDelete" Grid.Column="1" Content="Delete" Margin="5 5 5 0"/>
+                    <Button x:Name="btnEdit" Grid.Column="1" Content="Edit" Margin="5 5 5 0" Click="btnEdit_Click"/>
+                    <Button x:Name="btnDelete" Grid.Column="1" Content="Delete" Margin="5 5 5 0" Click="btnDelete_Click"/>
                 </StackPanel>
             </Grid>
         </GroupBox>

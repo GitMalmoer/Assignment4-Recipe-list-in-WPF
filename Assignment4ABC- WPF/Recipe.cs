@@ -14,10 +14,26 @@ namespace Assignment4ABC__WPF
         private string[] _arrayOfIngredients; // every object has inside arrayofingredients
         private int _MaxNumOfIngredients;
         // cant make them static because they are a part of every object not just a class
-        public Recipe(int maxNumOfIngredients) //string name, string description, FoodCategory foodCategory
+        private int _index;
+        private int _ingredientCounter;
+
+        public Recipe(int maxNumOfIngredients) 
         {
             _MaxNumOfIngredients = maxNumOfIngredients;
             _arrayOfIngredients = new string[_MaxNumOfIngredients];
+        }
+
+        public static Recipe RecipeProp{ get;}
+        public int IngredientCounter
+        {
+            get { return _ingredientCounter; }
+            set { _ingredientCounter = value; }
+        }
+
+        public int Index 
+        {
+            get { return _index; }
+            set { _index = value; }
         }
 
         public FoodCategory FoodCategory
@@ -39,7 +55,7 @@ namespace Assignment4ABC__WPF
         public  string[] ArrayOfIngredients
         {
             get { return _arrayOfIngredients;}
-            //set { _arrayOfIngredients = value;}
+            set { _arrayOfIngredients = value;}
         }
         public  void AddToArrayOfIngredients(string ingredient)
         {
@@ -51,7 +67,7 @@ namespace Assignment4ABC__WPF
             {
                 for(int i = 0;i<_arrayOfIngredients.Length;i++)
                 {
-                    if (_arrayOfIngredients[i] == null)
+                    if (_arrayOfIngredients[i] == null || _arrayOfIngredients[i] == string.Empty)
                     {
                         _arrayOfIngredients[i] = ingredient;
                         break;
@@ -61,9 +77,32 @@ namespace Assignment4ABC__WPF
             }
         }
 
+        public void DeleteAt(int index)
+        {
+            if(_index != -1)
+            {
+                ArrayOfIngredients[index] = String.Empty;
+            }
+            MoveItemsToLeft(index);
+        }
+
+        private void MoveItemsToLeft(int index)
+        {
+            if (index == _ingredientCounter - 1) // checks if its the last item. -1 because index starts from 0 and counter starts from 1.
+            {
+                ArrayOfIngredients[index] = string.Empty;
+            }
+            else
+            {
+                for (int i = index; i < _ingredientCounter; i++)
+                {
+                    ArrayOfIngredients[i] = ArrayOfIngredients[i + 1];
+                    ArrayOfIngredients[i + 1] = String.Empty;
+                }
+            }
+        }
 
 
-        
 
     }
 }
