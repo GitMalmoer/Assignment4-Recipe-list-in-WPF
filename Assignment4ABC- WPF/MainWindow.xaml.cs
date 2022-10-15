@@ -25,7 +25,7 @@ namespace Assignment4ABC__WPF
     {
 
         private const int maxNumOfIngredients = 50;
-        private const int maxNumOfElements = 5;
+        private const int maxNumOfElements = 200;
         private bool _finishedEditing = true;
         private int _editingIndex = -1;
 
@@ -86,7 +86,6 @@ namespace Assignment4ABC__WPF
         {
             int index = lstResults.SelectedIndex;
             recipeManager.Index = index;
-            lblIndex.Content = recipeManager.Index;
         }
 
         private void lstResults_MouseDoubleClick(object sender, MouseButtonEventArgs e)
