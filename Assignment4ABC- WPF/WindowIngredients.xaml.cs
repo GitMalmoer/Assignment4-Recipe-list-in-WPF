@@ -20,7 +20,6 @@ namespace Assignment4ABC__WPF
     public partial class WindowIngredients : Window 
     {
         Recipe curRecipe;
-        private int _selectedIndex;
         public WindowIngredients(Recipe recipe) // GETTING THE OBJECT curRecipe
         {
             InitializeComponent();
@@ -105,8 +104,15 @@ namespace Assignment4ABC__WPF
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             int index = curRecipe.Index;
-            curRecipe.DeleteAt(index);
-            ShowList();
+            if (curRecipe.Index != -1)
+            {
+                curRecipe.DeleteAt(index);
+                ShowList();
+            }
+            else
+            {
+                MessageBox.Show("Select the ingredient first!");
+            }    
         }
     }
 }

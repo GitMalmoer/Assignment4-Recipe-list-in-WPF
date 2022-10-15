@@ -14,16 +14,17 @@ namespace Assignment4ABC__WPF
         private string[] _arrayOfIngredients; // every object has inside arrayofingredients
         private int _MaxNumOfIngredients;
         // cant make them static because they are a part of every object not just a class
-        private int _index;
+        private int _index = -1;
         private int _ingredientCounter;
 
         public Recipe(int maxNumOfIngredients) 
         {
             _MaxNumOfIngredients = maxNumOfIngredients;
             _arrayOfIngredients = new string[_MaxNumOfIngredients];
+            _FoodCategory = FoodCategory.Other;
+
         }
 
-        public static Recipe RecipeProp{ get;}
         public int IngredientCounter
         {
             get { return _ingredientCounter; }
@@ -88,7 +89,7 @@ namespace Assignment4ABC__WPF
 
         private void MoveItemsToLeft(int index)
         {
-            if (index == _ingredientCounter - 1) // checks if its the last item. -1 because index starts from 0 and counter starts from 1.
+            if (index == _ingredientCounter - 1) // checks if index == last item. -1 because index starts from 0 and counter starts from 1.
             {
                 ArrayOfIngredients[index] = string.Empty;
             }
