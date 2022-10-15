@@ -8,7 +8,7 @@
         Title="Recipe book by Marcin Junka in WPF!" Height="400" Width="846">
 
     <StackPanel>
-        <Grid Height="333">
+        <Grid Height="400">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*"/>
@@ -40,7 +40,7 @@
                     <!-- Textbox-->
                     <TextBox x:Name="txtDescription" Margin="5,5,0,15" Height="200" TextWrapping="Wrap" AcceptsReturn="True" />
                     <!-- Add recipe button -->
-                    <Button x:Name="btnAddRecipe" Content="Add Recipe" Click="btnAddRecipe_Click"/>
+                    <Button x:Name="btnAddRecipe" Content="Add Recipe" Click="btnAddRecipe_Click" Opacity="1" />
                 </StackPanel>
             </GroupBox>
             
@@ -76,7 +76,8 @@
 
                 <!-- Label double click for info -->
                 <Label Content="Double click on an item for ingredients cooking instructions!" HorizontalAlignment="Center" Foreground="Green" FontWeight="Bold"/>
-            
+                <Label x:Name="lblNrRecipes" Content="Number of recipes"  HorizontalAlignment="Center"/>
+                <Label x:Name="lblIndex" Content="Index"  HorizontalAlignment="Center"/>
             </StackPanel>
         </Grid>
 

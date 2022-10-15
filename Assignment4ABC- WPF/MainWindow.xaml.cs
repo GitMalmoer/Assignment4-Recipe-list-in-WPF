@@ -26,6 +26,8 @@ namespace Assignment4ABC__WPF
 
         private const int maxNumOfIngredients = 50;
         private const int maxNumOfElements = 200;
+        private bool _finishedEditing = true;
+        private int _editingIndex = -1;
 
         Recipe curRecipe = new Recipe(maxNumOfIngredients);
         RecipeManager recipeManager = new RecipeManager(maxNumOfElements);
@@ -59,23 +61,32 @@ namespace Assignment4ABC__WPF
 
         private void btnAddRecipe_Click(object sender, RoutedEventArgs e)
         {
-            curRecipe.NameRecipe = txtNameOfTheRecipe.Text; // sends to class name of recipe
-            curRecipe.DescriptionRecipe = txtDescription.Text; // sends to class description of recipe
+            if (_finishedEditing == true)
+            {
+                curRecipe.NameRecipe = txtNameOfTheRecipe.Text; // sends to class name of recipe
+                curRecipe.DescriptionRecipe = txtDescription.Text; // sends to class description of recipe
 
-            recipeManager.AddRecipeObject(curRecipe); //method which addds recipeobj to array of objects in recipe manager
-            DisplayLstResults();
+                recipeManager.AddRecipeObject(curRecipe); //method which addds recipeobj to array of objects in recipe manager
+                DisplayLstResults();
 
 
 
-            curRecipe = new Recipe(maxNumOfIngredients);
-            cmbCategory.SelectedItem = curRecipe.FoodCategory; // combobox gets the value from recipe class so by default it is "other"
-            txtDescription.Text = string.Empty;
-            txtNameOfTheRecipe.Text = string.Empty;
+
+                curRecipe = new Recipe(maxNumOfIngredients);
+                // theory without this recipelistarray is filled with pointers to one object
+
+                cmbCategory.SelectedItem = curRecipe.FoodCategory; // combobox gets the value from recipe class so by default it is "other"
+                txtDescription.Text = string.Empty;
+                txtNameOfTheRecipe.Text = string.Empty;
+            }
+            else
+                MessageBox.Show("Finish Editing first!");
         }
         private void lstResults_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = lstResults.SelectedIndex;
             recipeManager.Index = index;
+            lblIndex.Content = recipeManager.Index;
         }
 
         private void lstResults_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -91,14 +102,21 @@ namespace Assignment4ABC__WPF
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (recipeManager.Index != -1)
+            if (_finishedEditing == true)
             {
-                recipeManager.DeleteAt(recipeManager.Index);
-                DisplayLstResults();
+                if (recipeManager.Index != -1)
+                {
+                    recipeManager.DeleteAt(recipeManager.Index);
+                    DisplayLstResults();
+                }
+                else
+                {
+                    MessageBox.Show("Select the recipe first!");
+                }
             }
             else
             {
-                MessageBox.Show("Select the recipe first!");
+                MessageBox.Show("Finish editing first!");
             }
         }
 
@@ -110,6 +128,7 @@ namespace Assignment4ABC__WPF
                 if (recipeManager.RecipeArray[i] != null)
                     lstResults.Items.Add((string.Format("{0,-18} {1,-20} {2,5} ", recipeManager.RecipeArray[i].NameRecipe, recipeManager.RecipeArray[i].FoodCategory, recipeManager.RecipeArray[i].IngredientCounter)));
             }
+            lblNrRecipes.Content = recipeManager.ObjectCounter.ToString();
         }
 
         private void btnClearSelection_Click(object sender, RoutedEventArgs e)
@@ -119,45 +138,53 @@ namespace Assignment4ABC__WPF
 
         private void btnEditBegin_Click(object sender, RoutedEventArgs e)
         {
-            ///  1 first you select which one you want to edit
-            ///  2 click edit begin 
-            ///  3. in txtDescription and txtName appears your text
-            ///  4. in Add Ingredients appears all your ingredients
-            ///  5 food category cmbbox changes to what it is in selected
             int index = recipeManager.Index;
-
-            if(recipeManager.Index == -1)
+            if(index == -1)
             {
                 MessageBox.Show("You need to select item first");
             }
             else
             {
                 curRecipe = recipeManager.RecipeArray[index];
+
                 txtDescription.Text = curRecipe.DescriptionRecipe;
                 txtNameOfTheRecipe.Text = curRecipe.NameRecipe;
                 cmbCategory.SelectedItem = curRecipe.FoodCategory;
+                _finishedEditing = false; // when this is false you cant click button add recipe
+                btnAddRecipe.Foreground = Brushes.Red;
+                _editingIndex = index;
             }
-
-            
-            
 
         }
 
         private void btnEditFinish_Click(object sender, RoutedEventArgs e)
         {
-            if (recipeManager.Index != -1)
+            if (recipeManager.Index == _editingIndex && recipeManager.Index != -1)
             {
                 curRecipe.DescriptionRecipe = txtDescription.Text;
                 curRecipe.NameRecipe = txtNameOfTheRecipe.Text;
                 curRecipe.FoodCategory = (FoodCategory)cmbCategory.SelectedItem;
 
                 recipeManager.RecipeArray[recipeManager.Index] = curRecipe;
-                DisplayLstResults();
+
+                
+
+                _finishedEditing = true; // if its true then its possible to click button add recipe
+                btnAddRecipe.Foreground = Brushes.Black; // setting add recipe button to color red indicating that you shouldnt click it now, instead you should end editing first.
+
                 curRecipe = new Recipe(maxNumOfIngredients);
+
+                DisplayLstResults();
+
             }
-            else
+            else if(recipeManager.Index == -1)
             {
-                MessageBox.Show("You need to select the recipe!");
+                MessageBox.Show("You didnt select anything");
+            }
+            else if(recipeManager.Index != _editingIndex)
+            {
+                MessageBox.Show("You need to select the right recipe");
+
             }
 
         }

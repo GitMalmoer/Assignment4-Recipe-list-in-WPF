@@ -19,11 +19,14 @@ namespace Assignment4ABC__WPF
             _maxNumOfElements = maxNumOfElements;
 
         }
-
         public Recipe[] RecipeArray
         {
             get { return _recipeList; }
             set { _recipeList = value;}
+        }
+        public int ObjectCounter 
+        {
+            get { return _objectCounter;}
         }
         public int Index 
         {
@@ -40,13 +43,13 @@ namespace Assignment4ABC__WPF
             else
                 for (int i = 0; i < _maxNumOfElements; i++)
                 {
-                    if (
-                        _recipeList[i] == null)
+                    if (_recipeList[i] == null)
                     {
                         _recipeList[i] = recipe;
                         break;
                     }
                 }
+            CountObjects();
         }
         public void DeleteAt(int index)
         {
@@ -55,22 +58,22 @@ namespace Assignment4ABC__WPF
                 _recipeList[index] = null;
             }
             CountObjects();
-            MoveItemsToLeft(index);
+            MoveItemsToRight(index);
         }
-        private void MoveItemsToLeft(int index)
-        {
-            if (index == _objectCounter - 1) // checks if index == last item. -1 because index starts from 0 and counter starts from 1.
-            {
-                _recipeList[index] = null;
-            }
-            else
-            {
+        private void MoveItemsToRight(int index)
+        {//        0 1                1 2 
+            //if (index == _objectCounter - 1) // checks if index == last item. -1 because index starts from 0 and counter starts from 1.
+            //{
+            //    _recipeList[index] = null;
+            //}
+            //else
+            //{
                 for (int i = index; i < _objectCounter; i++)
                 {
                     _recipeList[i] = _recipeList[i + 1];
                     _recipeList[i + 1] = null;
                 }
-            }
+            //}
         }
 
         private void CountObjects()
