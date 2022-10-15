@@ -25,7 +25,7 @@ namespace Assignment4ABC__WPF
     {
 
         private const int maxNumOfIngredients = 50;
-        private const int maxNumOfElements = 200;
+        private const int maxNumOfElements = 5;
         private bool _finishedEditing = true;
         private int _editingIndex = -1;
 

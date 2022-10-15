@@ -9,7 +9,7 @@ namespace Assignment4ABC__WPF
     public class RecipeManager
     {
 
-        Recipe[] _recipeList = new Recipe[200];
+        Recipe[] _recipeList;
         private int _maxNumOfElements;
         private int _index = -1;
         private int _objectCounter;
@@ -17,6 +17,7 @@ namespace Assignment4ABC__WPF
         public RecipeManager(int maxNumOfElements)
         {
             _maxNumOfElements = maxNumOfElements;
+            _recipeList = new Recipe[_maxNumOfElements];
 
         }
         public Recipe[] RecipeArray
@@ -40,7 +41,7 @@ namespace Assignment4ABC__WPF
 
                 _recipeList[0] = recipe;
             }
-            else
+            else if(_objectCounter != _maxNumOfElements)
                 for (int i = 0; i < _maxNumOfElements; i++)
                 {
                     if (_recipeList[i] == null)
@@ -61,19 +62,12 @@ namespace Assignment4ABC__WPF
             MoveItemsToRight(index);
         }
         private void MoveItemsToRight(int index)
-        {//        0 1                1 2 
-            //if (index == _objectCounter - 1) // checks if index == last item. -1 because index starts from 0 and counter starts from 1.
-            //{
-            //    _recipeList[index] = null;
-            //}
-            //else
-            //{
+        {
                 for (int i = index; i < _objectCounter; i++)
                 {
                     _recipeList[i] = _recipeList[i + 1];
                     _recipeList[i + 1] = null;
                 }
-            //}
         }
 
         private void CountObjects()
