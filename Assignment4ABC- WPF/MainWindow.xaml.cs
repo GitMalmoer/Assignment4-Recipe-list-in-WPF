@@ -61,7 +61,7 @@ namespace Assignment4ABC__WPF
 
         private void btnAddRecipe_Click(object sender, RoutedEventArgs e)
         {
-            if (_finishedEditing == true)
+            if (_finishedEditing == true && txtNameOfTheRecipe.Text != String.Empty)
             {
                 curRecipe.NameRecipe = txtNameOfTheRecipe.Text; // sends to class name of recipe
                 curRecipe.DescriptionRecipe = txtDescription.Text; // sends to class description of recipe
@@ -79,8 +79,12 @@ namespace Assignment4ABC__WPF
                 txtDescription.Text = string.Empty;
                 txtNameOfTheRecipe.Text = string.Empty;
             }
-            else
+            else if(_finishedEditing == false)
                 MessageBox.Show("Finish Editing first!");
+            else if(txtNameOfTheRecipe.Text == String.Empty)
+            {
+                MessageBox.Show("Name of recipe can't be empty!");
+            }
         }
         private void lstResults_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
